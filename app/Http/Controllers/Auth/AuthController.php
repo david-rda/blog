@@ -4,10 +4,35 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\User;
 use Auth;
 
 class AuthController extends Controller
 {
+    public function signup() {
+        $this->validate($request, [
+            "name" => "required",
+            "email" => "required|email",
+            "password" => "required|min:4"
+        ]);
+
+        try {
+            $user = new User();
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->password = $request->password;
+            $user->save();
+
+            return response()->json([
+                "success" => "created!"
+            ], 200);
+        }catch(Exception $e) {
+            return response()->json([
+                "error" => "not created!"
+            ], 422);
+        }
+    }
+
     public function signin(Request $request) {
         $data = $this->validate($request, [
             'email' => 'required|email',

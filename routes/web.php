@@ -18,3 +18,4 @@ Route::group(["prefix" => "comment"], function() {
 });
 
 Route::post("/signin", [AuthController::class, "signin"]);
+Route::post("/signup", [AuthController::class, "signup"]);
