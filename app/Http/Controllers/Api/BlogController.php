@@ -19,15 +19,11 @@ class BlogController extends Controller
         $this->validate($request, [
             'title' => 'required',
             'description' => 'required',
-            // 'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-
-        // $imagePath = $request->file('image')->store('blog_images', 'public');
 
         $blog = Blog::create([
             'title' => $request->input('title'),
             'description' => $request->input('description'),
-            // 'image' => $imagePath,
             'user_id' => Auth::id(),
         ]);
 
@@ -37,11 +33,6 @@ class BlogController extends Controller
     public function show($id)
     {
         return Blog::findOrFail($id);
-    }
-
-    public function edit($id)
-    {
-        //
     }
 
     public function update(Request $request, $id)
