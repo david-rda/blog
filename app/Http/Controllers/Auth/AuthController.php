@@ -9,7 +9,7 @@ use Auth;
 
 class AuthController extends Controller
 {
-    public function signup() {
+    public function signup(Request $request) {
         $this->validate($request, [
             "name" => "required",
             "email" => "required|email",
