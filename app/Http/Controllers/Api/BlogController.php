@@ -11,7 +11,7 @@ class BlogController extends Controller
 {
     public function index()
     {
-        return Blog::all();
+        return Blog::where("user_id", Auth::id());
     }
 
     public function store(Request $request)
